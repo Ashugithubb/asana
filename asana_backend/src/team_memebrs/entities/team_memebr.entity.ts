@@ -1,7 +1,9 @@
 import { Task } from "src/task/entities/task.entity";
 import { Team } from "src/team/entities/team.entity";
 import { User } from "src/user/entities/user.entity";
-import { Entity, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Role } from "src/user/enum/user.enum";
+import { Column, Entity, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { TeamMemberRole } from "../enum/team.member.role";
 
 @Entity('team_members')
 export class TeamMember {
@@ -13,6 +15,8 @@ export class TeamMember {
 
   @ManyToOne(() => Team, (team) => team.members, { onDelete: 'CASCADE' })
   team: Team;
+
+
 
   @ManyToMany(()=>Task,(t)=>t.team_member)
   @JoinTable()

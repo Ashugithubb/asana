@@ -12,7 +12,7 @@ export class Team {
     team_name:string
 
     @Column({unique:true})
-    team_lead:string
+    team_leadId:number
 
     @CreateDateColumn()
     createdAt:Date

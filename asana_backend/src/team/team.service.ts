@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { forwardRef, Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateTeamDto } from './dto/create-team.dto';
 import { UpdateTeamDto } from './dto/update-team.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -6,20 +6,27 @@ import { Team } from './entities/team.entity';
 import { Repository } from 'typeorm';
 import { UserService } from 'src/user/user.service';
 import { ProjectService } from 'src/project/project.service';
+import { TeamMemebrsService } from 'src/team_memebrs/team_memebrs.service';
 
 @Injectable()
 export class TeamService {
   constructor(@InjectRepository(Team) private readonly teamRepo: Repository<Team>,
     private readonly userService: UserService,
-    private readonly projectService:ProjectService) { }
+
+    @Inject(forwardRef(()=>ProjectService))
+    private readonly projectService:ProjectService,
+
+    @Inject(forwardRef(() => TeamMemebrsService))
+  private teamMembesService: TeamMemebrsService) { }
+
 
   async createTeam(createTeamDto: CreateTeamDto, userId: number) {
-    const lead = createTeamDto.team_lead;
-    const teamLead = await this.teamRepo.findOneBy({team_lead:createTeamDto.team_lead});
+    const leadId = createTeamDto.team_leadId;
+    const teamLead = await this.teamRepo.findOneBy({team_leadId:createTeamDto.team_leadId});
 
     const team = teamLead?.team_name;
 
-    if(teamLead) return {"msg":`${lead} is already team lead of ${team} team`}
+    if(teamLead) return {"msg":`This Member is already team lead of ${team} team`};
 
     const user = await this.userService.findOne(userId);
     if (!user) return { "msg": "You are not Authorized" }
@@ -27,8 +34,14 @@ export class TeamService {
       ...createTeamDto,
       admin: user
     })
-    return await this.teamRepo.save(newTeam);
+    const savedTeam = await this.teamRepo.save(newTeam);
+      const res = await this.teamMembesService.create(createTeamDto.team_leadId,savedTeam.teamId);
+      console.log(res);
+    return {"msg":"Team is created "};
   }
+
+
+
 
 
   async findAllTeam() {
@@ -63,6 +76,9 @@ async findOneByGroupId(teamId:number){
   }
 
 
+  async findOneByleadId(leadId:number){
+    return this.teamRepo.findOneBy({team_leadId:leadId});
+  }
 
   async seeAllProjecofTeam(teamName:string){
       const exist = await this.teamRepo.findOne( {
