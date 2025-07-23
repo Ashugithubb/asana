@@ -13,9 +13,10 @@ export class TeamMemebrsController {
     return this.teamMemebrsService.create(+userId,+teamId);
   }
 
-  @Get()
-  findAll() {
-    return this.teamMemebrsService.findAll();
+  
+  @Get('/:teamId')
+  findAllTeamMeber(@Param('teamId') teamId:string) {
+    return this.teamMemebrsService.findAllTeamMeber(+teamId);
   }
 
   @Get(':id')

@@ -44,8 +44,12 @@ export class TeamMemebrsService {
 }
 
 
-  findAll() {
-    return `This action returns all teamMemebrs`;
+ async findAllTeamMeber(teamId:number) {
+    return await this.teamMemebrRepo.find({
+        where:{team:{teamId}},
+        relations:['user']
+    })
+   
   }
 
   async findOne(id: number) {

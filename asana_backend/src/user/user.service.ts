@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { Repository } from 'typeorm';
+import { ILike, Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import { HasingService } from 'src/hasing/hasing.service';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -27,6 +27,13 @@ export class UserService {
     return await this.userRepo.findOneBy({userId:id});
   }
   
+  async searchUser(name:string){
+    return await this.userRepo.find({
+      where:{first_name:ILike(`%${name}%`)},
+      take: 5,
+    }
+    )
+  }
   findAll() {
     return `This action returns all user`;
   }
