@@ -8,14 +8,46 @@ A full-stack project management application inspired by **Asana**, built with:
 
 ---
 
-## 🚀 Features
+✨ Features
+👑 Admin
+🔐 Register/Login
 
-* 🧑‍🤝‍🧑 User Authentication (JWT, Email/Password)
-* 🗂️ Create & manage projects, tasks, and teams
-* ✅ Task assignment and tracking
-* 📋 Role-based access control (Admin, User)
-* 💾 PostgreSQL + TypeORM for robust data modeling
-* 🧪 Well-structured APIs with NestJS
+➕ Add Teams (CRUD)
+
+👨‍💼 Assign Team Leads (1 Lead per team max)
+
+👀 View all Projects and Tasks across the organization
+
+🧑‍💼 Team Lead
+🔐 Register/Login
+
+📁 Create, Update, Delete Projects (Team-specific)
+
+📝 Add Tasks inside a Project
+
+👤 Assign Tasks to any Member in the Team
+
+⏳ Default Task Status is Pending
+
+👨‍🔧 Team Member
+🔐 Register/Login
+
+📂 View Projects (Only where task is assigned)
+
+✅ Update Status of assigned tasks:
+
+Pending
+
+On-Hold
+
+Completed
+
+🖥️ UI Design
+Intuitive and minimal layout using Material UI (MUI)
+
+Seamless experience for Admin, Team Leads, and Members
+
+Role-based UI rendering for restricted access
 
 
 ## 🛠️ Tech Stack
