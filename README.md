@@ -6,48 +6,44 @@ A full-stack project management application inspired by **Asana**, built with:
 * **Backend**: [NestJS](https://nestjs.com/) + [TypeORM](https://typeorm.io/)
 * **Database**: [PostgreSQL](https://www.postgresql.org/)
 
+## ✨ Features
+
+### 👑 Admin
+
+- 🔐 **Register/Login**
+- ➕ **Add Teams** (CRUD)
+- 👨‍💼 **Assign Team Leads** (1 Lead per team max)
+- 👀 **View all Projects and Tasks** across the organization
+
 ---
 
-✨ Features
-👑 Admin
-🔐 Register/Login
+### 🧑‍💼 Team Lead
 
-➕ Add Teams (CRUD)
+- 🔐 **Register/Login**
+- 📁 **Create, Update, Delete Projects** (Team-specific)
+- 📝 **Add Tasks** inside a Project
+- 👤 **Assign Tasks** to any Member in the Team
+- ⏳ **Default Task Status** is `Pending`
 
-👨‍💼 Assign Team Leads (1 Lead per team max)
+---
 
-👀 View all Projects and Tasks across the organization
+### 👨‍🔧 Team Member
 
-🧑‍💼 Team Lead
-🔐 Register/Login
+- 🔐 **Register/Login**
+- 📂 **View Projects** (Only where task is assigned)
+- ✅ **Update Status** of assigned tasks:
+  - `Pending`
+  - `On-Hold`
+  - `Completed`
 
-📁 Create, Update, Delete Projects (Team-specific)
+---
 
-📝 Add Tasks inside a Project
+## 🖥️ UI Design
 
-👤 Assign Tasks to any Member in the Team
+- 🎨 Intuitive and minimal layout using **Material UI (MUI)**
+- ⚡ Seamless experience for Admin, Team Leads, and Members
+- 🔐 Role-based UI rendering for restricted access
 
-⏳ Default Task Status is Pending
-
-👨‍🔧 Team Member
-🔐 Register/Login
-
-📂 View Projects (Only where task is assigned)
-
-✅ Update Status of assigned tasks:
-
-Pending
-
-On-Hold
-
-Completed
-
-🖥️ UI Design
-Intuitive and minimal layout using Material UI (MUI)
-
-Seamless experience for Admin, Team Leads, and Members
-
-Role-based UI rendering for restricted access
 
 
 ## 🛠️ Tech Stack
